@@ -33,6 +33,43 @@
           null
         ]
       },
+      "/Users/luke/turing/3module/projects/rails-engine/spec/requests/api/v1/items_request_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          5,
+          5,
+          null,
+          5,
+          5,
+          5,
+          5,
+          null,
+          5,
+          5,
+          5,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/luke/turing/3module/projects/rails-engine/spec/requests/api/v1/merchants_request_spec.rb": {
         "lines": [
           1,
@@ -88,12 +125,52 @@
           null,
           null,
           null,
-          1,
-          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/luke/turing/3module/projects/rails-engine/app/controllers/api/v1/items_controller.rb": {
+        "lines": [
           1,
           1,
           1,
           null,
+          null
+        ]
+      },
+      "/Users/luke/turing/3module/projects/rails-engine/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/luke/turing/3module/projects/rails-engine/app/serializers/item_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          1,
           null
         ]
       },
@@ -111,12 +188,6 @@
           null
         ]
       },
-      "/Users/luke/turing/3module/projects/rails-engine/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
       "/Users/luke/turing/3module/projects/rails-engine/app/serializers/merchant_serializer.rb": {
         "lines": [
           1,
@@ -126,6 +197,6 @@
         ]
       }
     },
-    "timestamp": 1657661065
+    "timestamp": 1657665526
   }
 }
