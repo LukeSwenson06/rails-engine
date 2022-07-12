@@ -24,10 +24,20 @@ RSpec.describe 'Items API' do
       expect(item[:attributes][:name]).to be_a(String)
       expect(item[:attributes][:description]).to be_a(String)
       expect(item[:attributes][:unit_price]).to be_a(Float)
+      expect(item[:attributes][:merchant_id]).to be_a(Integer)
 
       expect(item[:attributes]).to_not have_key(:created_at)
       expect(item[:attributes]).to_not have_key(:updated_at)
-      expect(item[:attributes]).to_not have_key(:merchant_id)
+
     end
   end
+
+  # it "sends a list of 1 item" do
+  #   items = create_list(:item, 5)
+  #   item_id = items.first.id
+  #
+  #   get "api/v1/items/#{item_id}"
+  #
+  #   expect(response)
+  # end
 end
