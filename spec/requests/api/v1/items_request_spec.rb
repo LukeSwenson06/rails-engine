@@ -24,7 +24,6 @@ RSpec.describe 'Items API' do
       expect(item[:attributes][:name]).to be_a(String)
       expect(item[:attributes][:description]).to be_a(String)
       expect(item[:attributes][:unit_price]).to be_a(Float)
-      expect(item[:attributes][:merchant_id]).to be_a(Integer)
 
       expect(item[:attributes]).to_not have_key(:created_at)
       expect(item[:attributes]).to_not have_key(:updated_at)
@@ -32,12 +31,57 @@ RSpec.describe 'Items API' do
     end
   end
 
-  # it "sends a list of 1 item" do
-  #   items = create_list(:item, 5)
-  #   item_id = items.first.id
-  #
-  #   get "api/v1/items/#{item_id}"
-  #
-  #   expect(response)
-  # end
+  it "sends a list of 1 item" do
+    items = create_list(:item, 5)
+    item1 = items.first
+    item2 = items.second
+
+    get "/api/v1/items/#{item1.id}"
+
+    response_body = JSON.parse(response.body, symbolize_names: true)
+    item = response_body[:data]
+
+    expect(response).to have_http_status(200)
+
+    expect(item).to have_key(:attributes)
+    expect(item[:attributes][:name]).to be_a(String)
+    expect(item[:attributes][:description]).to be_a(String)
+    expect(item[:attributes][:unit_price]).to be_a(Float)
+
+    expect(item[:attributes]).to_not have_key(:created_at)
+    expect(item[:attributes]).to_not have_key(:updated_at)
+
+  end
+
+  it "can create a new item" do
+    merchant = create(:merchant)
+    item_params = ({
+      name: "Magic Wand",
+      description: "Its only the most magical thing in the world",
+      unit_price: 1.00,
+      merchant_id: merchant.id
+      })
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
+    created_item = Item.last
+
+    expect(response).to have_http_status(200)
+    expect(created_item.name).to eq(item_params[:name])
+    expect(created_item.description).to eq(item_params[:description])
+    expect(created_item.unit_price).to eq(item_params[:unit_price])
+
+  end
+
+  it "can delete a item" do
+    items = create_list(:item, 5)
+    item1 = items.first
+    expect(items.count).to eq(5)
+
+    delete "/api/v1/items/#{item1.id}"
+    expect(response).to have http_status(204)
+    expect(items.count).to eq(4)
+    expect(item1.exists?).to be(false)
+    
+  end
 end
