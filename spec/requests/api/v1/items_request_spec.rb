@@ -66,7 +66,7 @@ RSpec.describe 'Items API' do
     post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
     created_item = Item.last
 
-    expect(response).to have_http_status(200)
+    expect(response).to have_http_status(201)
     expect(created_item.name).to eq(item_params[:name])
     expect(created_item.description).to eq(item_params[:description])
     expect(created_item.unit_price).to eq(item_params[:unit_price])
@@ -79,9 +79,30 @@ RSpec.describe 'Items API' do
     expect(items.count).to eq(5)
 
     delete "/api/v1/items/#{item1.id}"
-    expect(response).to have http_status(204)
-    expect(items.count).to eq(4)
-    expect(item1.exists?).to be(false)
-    
+    item = Item.all
+    expect(response).to have_http_status(204)
+    expect(item.count).to eq(4)
+
+  end
+
+  it "can update an existing item" do
+    merchant = create(:merchant)
+    id = create(:item).id
+    previous_name = Item.last.name
+    item_params = ({
+      name: "Magic Wand2",
+      description: "Its only the 2nd most magical thing in the world",
+      unit_price: 2.00,
+      merchant_id: merchant.id
+      })
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate({item: item_params})
+    item = Item.find_by(id: id)
+
+    expect(response).to have_http_status(200)
+    expect(item.name).to_not eq(previous_name)
+    expect(item.name).to eq("Magic Wand2")
+
   end
 end

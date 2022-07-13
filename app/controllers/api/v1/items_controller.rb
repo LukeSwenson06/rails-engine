@@ -8,7 +8,18 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    render json: ItemSerializer.new(Item.create(item_params))
+    render json: ItemSerializer.new(Item.create(item_params)), status: :created
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+  end
+
+  def update
+    item = Item.find(params[:id])
+    item.update(item_params)
+    render json: ItemSerializer.new(item)
   end
 
 private
