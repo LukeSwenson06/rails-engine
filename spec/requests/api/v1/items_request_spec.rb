@@ -105,4 +105,20 @@ RSpec.describe 'Items API' do
     expect(item.name).to eq("Magic Wand2")
 
   end
+
+  it "can get an item's merchant" do
+    merchant = create(:merchant)
+    item1 = create(:item, merchant_id: merchant.id)
+
+    get "/api/v1/items/#{item1.id}/merchant"
+
+    response_body = JSON.parse(response.body, symbolize_names: true)
+    items_merchant = response_body[:data]
+
+    expect(response).to have_http_status(200)
+
+    expect(items_merchant[:id].to_i).to eq(merchant.id)
+    expect(items_merchant[:attributes][:name]).to be_a(String)
+
+  end
 end
