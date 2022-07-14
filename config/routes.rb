@@ -8,12 +8,13 @@ Rails.application.routes.draw do
       end
 
       namespace :merchants do
+        get '/find', to: 'search#index'
         get '/:id/items', to: 'items#index'
       end
 
       resources :merchants, only: %i[index show]
       resources :items, only: %i[index show create destroy update]
-      
+
 
     end
   end
