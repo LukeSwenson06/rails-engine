@@ -9,10 +9,15 @@ RSpec.describe 'Merchant Search' do
 
     get '/api/v1/merchants/find?name=aLpI'
 
+    expect(response).to be_successful
+
     response_body = JSON.parse(response.body, symbolize_names: true)
 
-    expect(response).to be_successful
-  
+    merchants = response_body[:data].map do |merchant|
+      merchant[:attributes][:name]
+    end
 
+    expect(merchants).to eq([merchant1.name])
+    expect(merchants).to_not eq([merchant2.name, merchant3.name, merchant4.name])
   end
 end
