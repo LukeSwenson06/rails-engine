@@ -5,6 +5,6 @@ class Merchant < ApplicationRecord
   def self.search_merchant(search_params)
      where("name ILIKE ?", "%#{search_params}%")
      .order(name: :asc)
-     .limit(1)
+     .first
   end
 end
