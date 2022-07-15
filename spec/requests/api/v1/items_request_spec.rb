@@ -37,7 +37,7 @@ RSpec.describe 'Items API' do
     item2 = items.second
 
     get "/api/v1/items/#{item1.id}"
-
+  
     response_body = JSON.parse(response.body, symbolize_names: true)
     item = response_body[:data]
 
