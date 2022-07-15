@@ -12,8 +12,8 @@ RSpec.describe Merchant, type: :model do
       merchant3 = create(:merchant, name: "Thancred Waters")
       merchant4 = create(:merchant, name: "Y'shtola Rhul")
 
-      expect(Merchant.search_merchant("aLpI")).to eq([merchant1])
-      expect(Merchant.search_merchant("al")).to eq([merchant2])
+      expect(Merchant.search_merchant("aLpI")).to eq(merchant1)
+      expect(Merchant.search_merchant("al")).to eq(merchant2)
 
   end
 end
